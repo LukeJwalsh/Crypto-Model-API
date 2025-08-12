@@ -1,8 +1,6 @@
-# Crypt0Nest-Crypto-Model-API
+# Crypto-Model-API
 
 A FastAPI service that serves machine learning model predictions via REST API. Supports both **synchronous** and **asynchronous** model inference using **Celery + Redis**, secured with **Auth0 JWT authentication**.
-
-Built as part of the backend track at Crypt0Nest.
 
 ---
 
@@ -118,5 +116,4 @@ A basic frontend is included at `/static/index.html` for quickly testing:
 
 ---
 
-> Built by Backend Team at Crypt0Nest 
 
