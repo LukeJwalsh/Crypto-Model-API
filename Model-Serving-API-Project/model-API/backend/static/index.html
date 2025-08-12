@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cryptonest Model API Tester</title>
+
+  <script src="https://cdn.auth0.com/js/auth0-spa-js/1.13/auth0-spa-js.production.js"></script>
+  <script defer src="/static/js/auth.js"></script>
+  <script defer src="/static/js/main.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 2rem;
+      background-color: #f4f4f4;
+    }
+
+    textarea {
+      width: 100%;
+    }
+
+    pre {
+      background: #fff;
+      padding: 1rem;
+      border-radius: 4px;
+      overflow-x: auto;
+      box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>🔐 Cryptonest Model API Tester</h1>
+
+  <button id="login">Login</button>
+  <button id="logout" style="display:none;">Logout</button>
+  <p id="auth-status">🔓 Not Logged In</p>
+
+  <hr />
+
+  <form id="predict-form" style="display:none;">
+    <label for="model-id">Model:</label>
+    <select id="model-id"></select>
+    <button type="button" id="model-info">ℹ️ Info</button>
+
+    <br /><br />
+
+    <label for="inputs">Batch Inputs:</label><br />
+    <textarea id="inputs" rows="6">
+[
+  {
+    "ret_7d": 0.0,
+    "ret_10d": 0.0,
+    "ret_14d": 0.0,
+    "ret_21d": 0.0,
+    "ret_30d": 0.0,
+    "ret_42d": 0.0,
+    "ret_60d": 0.0,
+    "volatility_14d": 0.0,
+    "volume_zscore_14d": 0.0,
+    "rsi_14": 0.0,
+    "bb_width": 0.0,
+    "bb_percent_b": 0.0,
+    "macd_diff": 0.0,
+    "mom_x_vol_42d": 0.0,
+    "ret_1d_neutral": 0.0,
+    "ret_7d_neutral": 0.0,
+    "ret_10d_neutral": 0.0,
+    "ret_14d_neutral": 0.0,
+    "ret_21d_neutral": 0.0,
+    "ret_30d_neutral": 0.0,
+    "ret_42d_neutral": 0.0,
+    "ret_60d_neutral": 0.0
+}
+]
+    </textarea>
+
+    <br /><br />
+    <button type="submit">Submit Prediction</button>
+  </form>
+
+  <h3>Prediction Response:</h3>
+  <pre id="response">Waiting for input...</pre>
+
+  <h3>Model Metadata:</h3>
+  <pre id="model-metadata">No model selected.</pre>
+
+  <hr />
+
+  <form id="job-form" style="display:none;">
+    <label for="job-id">Job ID:</label>
+    <select id="job-id-dropdown"></select>
+    <button type="submit">Check Job</button>
+  </form>
+
+  <h3>Job Status Response:</h3>
+  <pre id="job-response">Waiting for input...</pre>
+
+  <hr />
+
+  <button id="fetch-models" style="display:none;">Fetch All Models</button>
+  <h3>All Models:</h3>
+  <pre id="model-list">Waiting...</pre>
+</body>
+
+</html>

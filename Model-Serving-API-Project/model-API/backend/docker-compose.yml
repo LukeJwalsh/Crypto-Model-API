@@ -1,0 +1,24 @@
+version: '3.9'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    env_file: .env
+    command: uvicorn main:app --host 0.0.0.0 --port 8080 --reload
+
+  redis:
+    image: redis:7
+    container_name: redis-server
+    ports:
+      - "6379:6379"
+
+  celery:
+    build: .
+    depends_on:
+      - redis
+    env_file: .env
+    command: celery -A shared.worker.celery_app worker --loglevel=info
