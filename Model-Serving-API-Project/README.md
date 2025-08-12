@@ -1,6 +1,6 @@
 # Crypt0Nest-Crypto-Model-API
 
-A FastAPI service that serves machine learning model predictions via REST API. Supports both **synchronous** and **asynchronous** model inference using **Celery + Redis**.
+A FastAPI service that serves machine learning model predictions via REST API. Supports both **synchronous** and **asynchronous** model inference using **Celery + Redis**, secured with **Auth0 JWT authentication**.
 
 Built as part of the backend track at Crypt0Nest.
 
@@ -21,7 +21,7 @@ source .venv/bin/activate  # macOS/Linux
 ```bash
 pip install -r backend/requirements.txt
 ```
-
+thi
 3. Run the FastAPI app locally:
 
 ```bash
@@ -57,13 +57,15 @@ This launches:
 
 ## 🚀 API Endpoints
 
-| Method | Endpoint              | Description                         |
-| ------ | --------------------- | ----------------------------------- |
-| GET    | `/health`             | Basic health check                  |
-| GET    | `/`                   | Serves a simple HTML test client    |
-| POST   | `/v1/predict`         | Submit input data for prediction    |
-| GET    | `/v1/status/{job_id}` | Check status of an async prediction |
-| GET    | `/v1/result/{job_id}` | Retrieve final result of async job  |
+| Method | Endpoint                   | Description                             |
+| ------ | -------------------------- | --------------------------------------- |
+| GET    | `/v2/health/live`          | Basic health check                      |
+| GET    | `/v2/health/ready`         | Readiness check (models + Celery ready) |
+| POST   | `/v2/predict`              | Submit input data for prediction        |
+| GET    | `/v2/jobs/{job_id}`        | Check status of an async prediction     |
+| GET    | `/v2/jobs/{job_id}/result` | Retrieve final result of async job      |
+| GET    | `/v2/models`               | List available models                   |
+| GET    | `/v2/models/{model_id}`    | Retrieve metadata for a specific model  |
 
 Supports:
 
@@ -85,6 +87,7 @@ A basic frontend is included at `/static/index.html` for quickly testing:
 ## ⚙️ Architecture
 
 - **FastAPI** – REST API server
+- **Auth0** – Authentication & JWT validation
 - **Celery** – Background task queue for async inference
 - **Redis** – Broker & result backend for Celery
 - **Pandas / Scikit-learn** – Dummy models
@@ -96,19 +99,24 @@ A basic frontend is included at `/static/index.html` for quickly testing:
 - ✅ Sync + async prediction routes
 - ✅ Job queuing with Celery
 - ✅ Redis integration
+- ✅ Auth0 JWT authentication with JWKS caching
 - ✅ Docker + Docker Compose setup
 - ✅ Custom HTML client for testing
-- ✅ `/status` + `/result` endpoints
-
+- ✅ /status + /result endpoints
+- ✅ /health/live and /health/ready checks
 ---
 
 ## 🔒 Future Work
 
-- Deploy to Google Cloud Run
-- Add API key auth / rate limiting
+-Deploy to Google Cloud Run
+- Move secrets to GCP Secret Manager
+- Add rate limiting
 - Swap in real trained ML models
-- Add logging and error monitoring
+- Add structured logging and error monitoring
+- Restrict CORS in production
+- Disable /static in production
 
 ---
 
 > Built by Backend Team at Crypt0Nest 
+
